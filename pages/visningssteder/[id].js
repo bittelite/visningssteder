@@ -20,13 +20,13 @@ function Visningssted({ post, media }) {
             <p className='float-right -mb-3'>
               <img src={ post.acf.ikon } />
             </p>
-            <h1 className='text-4xl font-bold drop-shadow-lg'>
+            <h1 className='text-4xl font-bold drop-shadow-lg max-w-5xl mx-auto'>
               {post.title.rendered}
             </h1>
           </div>
         </div>
         <div className='p-4 bg-black text-white'>
-          <div className="flex md:basis-4/5 gap-2 flex-row flex-wrap ">
+          <div className="flex md:basis-4/5 gap-2 flex-row flex-wrap max-w-5xl mx-auto ">
             <p className="flex-1">Type:<br />
               <span className="font-bold text-2xl">{post.acf.type}</span>
             </p>
@@ -42,7 +42,7 @@ function Visningssted({ post, media }) {
             </div>
         </div>
         <div className='flex px-4 py-6 gap-2 flex-col sm:flex-row '>
-          <div className='md:basis-4/5 mx-auto'>
+          <div className='max-w-5xl mx-auto'>
             <p className='text-xl font-medium'>
               {post.acf.beskrivelse.ingress}
             </p>
@@ -51,9 +51,9 @@ function Visningssted({ post, media }) {
             </div>
           </div>
         </div>
-        <div className="container p-4 flex flex-col lg:flex-row flex-wrap gap-4">
+        <div className="container p-4 flex flex-col lg:flex-row flex-wrap gap-4 max-w-5xl mx-auto">
         {post.acf.flater.map(post => (
-            <div key={post.plassnr} className="flex font-sans rounded-md bg-gray-100 flex-1">
+            <div key={post.plassnr} className="flex font-sans rounded-md bg-gray-100 flex-1 max-w-xl">
               <div className="flex-none w-48 relative">
                 <img
                   src={media.find(image => image.id === post.hovedbilde).media_details.sizes.large.source_url}
