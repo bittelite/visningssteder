@@ -1,52 +1,54 @@
 import Link from "next/link";
+import Layout from "../../components/Layout/Layout";
 
 function Visningssted({ post, media }) {
 
   return (
+    <>
+    <Layout visningssted>
       <div className="container mx-auto max-w-7xl">
         <div className='relative'
         style={{
           backgroundImage: `url(${post._embedded['wp:featuredmedia'][0].source_url})`,
-          backgroundPosition: 'center center',
+          backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
           width: 'auto',
-          height: '50vh'
+          height: '65vh'
         }}>
-          <Link href="/">
-            <button className="h-10 px-6 font-semibold rounded-md bg-black text-white left-2 bottom-2 absolute">
-              Tilbake
-            </button>
-          </Link>
-        </div>
-        <div className='p-4 w-full'>
+          <div className='p-4 w-full left-0 bottom-0 absolute bg-gradient-to-t from-black text-white'>
             <p className='float-right -mb-3'>
               <img src={ post.acf.ikon } />
             </p>
-            <h1 className='text-4xl font-bold'>{post.title.rendered}</h1>
-            <p>{post.acf.fylke}</p>
+            <h1 className='text-4xl font-bold drop-shadow-lg'>
+              {post.title.rendered}
+            </h1>
+          </div>
         </div>
-        <div className='flex pl-4 py-6 gap-2 flex-col sm:flex-row'>
-          <div className='md:basis-1/2'>
+        <div className='p-4 bg-black text-white'>
+          <div className="flex md:basis-4/5 gap-2 flex-row flex-wrap ">
+            <p className="flex-1">Type:<br />
+              <span className="font-bold text-2xl">{post.acf.type}</span>
+            </p>
+            <p className="flex-1">Selskap:<br />
+              <span className="font-bold text-2xl">{post.acf.selskap}</span>
+            </p>
+            <p className="flex-1">Fylke:<br />
+              <span className="font-bold text-2xl">{post.acf.fylke}</span>
+            </p>
+            <p className="flex-1">Årlig besøk:<br />
+              <span className="font-bold text-2xl">{post.acf.besokende}</span>
+            </p>
+            </div>
+        </div>
+        <div className='flex px-4 py-6 gap-2 flex-col sm:flex-row '>
+          <div className='md:basis-4/5 mx-auto'>
             <p className='text-xl font-medium'>
               {post.acf.beskrivelse.ingress}
             </p>
-            <p className="py-6">
-              {post.acf.beskrivelse.tekst}
-            </p>
-          </div>
-          <div className='flex md:basis-1/2 gap-2 flex-col flex-wrap'>
-            <p className="flex-1 grow">Selskap:<br />
-            <span className="font-bold text-2xl">{post.acf.selskap}</span>
-            </p>
-            <p className="flex-1 grow">Årlig besøk:<br />
-              <span className="font-bold text-2xl">{post.acf.besok}</span>
-            </p>
-            <p className="flex-1 grow">Type:<br />
-              <span className="font-bold text-2xl">{post.acf.type}</span>
-            </p>
-            <p className="flex-1 grow">Skjermer:<br/>
-              <span className="font-bold text-2xl">35</span>
-            </p>
+            <div className="py-6"
+              dangerouslySetInnerHTML={{__html: post.acf.beskrivelse.tekst}}>
+            </div>
           </div>
         </div>
         <div className="container p-4 flex flex-col lg:flex-row flex-wrap gap-4">
@@ -61,9 +63,9 @@ function Visningssted({ post, media }) {
               </div>
               <form className="flex-auto p-6">
                 <div className="flex flex-wrap">
-                  <h1 className="flex-auto text-lg font-semibold text-slate-900">
+                  <h3 className="flex-auto text-lg font-semibold text-slate-900">
                     {post.type}
-                  </h1>
+                  </h3>
                   <div className="text-lg font-semibold text-slate-500">
                     {post.plassnr}
                   </div>
@@ -71,7 +73,7 @@ function Visningssted({ post, media }) {
                     Format: {post.format}
                   </div>
                   <p className="text-sm text-slate-700">
-                    Strategiske plasseringer og bred dekning.
+                    Plassering: {post.plassering}
                   </p>
                 </div>
               </form>
@@ -79,8 +81,10 @@ function Visningssted({ post, media }) {
             ))}
         </div>
       </div>
+      </Layout>
+      </>
   );
-}
+} 
 
 export async function getStaticPaths() {
   const res = await fetch('https://reklameservice.no/wp-json/wp/v2/visningssteder');

@@ -1,8 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .striped tr:nth-child(odd) {
+    @apply bg-gray-100
+  }
+  .striped tr:hover {
+    @apply bg-blue-100;
+    cursor: pointer;
+  }
+  .headerImg {
+    height: 500px;
+    z-index: 0;
+  }
+  .headerTxt {
+    z-index: 1;
+  }
+}
+li {
+  @apply list-disc ml-4;
+}
 
-html,
+
+
+html, 
 body {
   padding: 0;
   margin: 0;
@@ -19,9 +40,9 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     color: white;
