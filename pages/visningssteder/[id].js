@@ -20,20 +20,20 @@ function Visningssted({ post, media }) {
             <p className='float-right -mb-3'>
               <img src={ post.acf.ikon } />
             </p>
-            <h1 className='text-4xl font-bold drop-shadow-lg max-w-5xl mx-auto'>
+            <h1 className='text-5xl font-bold drop-shadow-lg max-w-5xl mx-auto'>
               {post.title.rendered}
             </h1>
           </div>
         </div>
         <div className='p-4 bg-black text-white'>
-          <div className="flex md:basis-4/5 gap-2 flex-row flex-wrap max-w-5xl mx-auto ">
-            <p className="flex-1">Type:<br />
+          <div className="grid grid-rows-2 grid-flow-col md:grid-rows-1 gap-2 max-w-5xl mx-auto ">
+            <p className="text-case">Type:<br />
               <span className="font-bold text-2xl">{post.acf.type}</span>
             </p>
-            <p className="flex-1">Selskap:<br />
+            <p className="pb-2 pr-2">Selskap:<br />
               <span className="font-bold text-2xl">{post.acf.selskap}</span>
             </p>
-            <p className="flex-1">Fylke:<br />
+            <p className="pb-2 pr-2">Fylke:<br />
               <span className="font-bold text-2xl">{post.acf.fylke}</span>
             </p>
             <p className="flex-1">Årlig besøk:<br />
@@ -41,9 +41,9 @@ function Visningssted({ post, media }) {
             </p>
             </div>
         </div>
-        <div className='flex px-4 py-6 gap-2 flex-col sm:flex-row '>
+        <div className='flex px-4 py-10 gap-2 flex-col sm:flex-row'>
           <div className='max-w-5xl mx-auto'>
-            <p className='text-xl font-medium'>
+            <p className='text-2xl font-medium pb-2'>
               {post.acf.beskrivelse.ingress}
             </p>
             <div className="py-6"
@@ -54,7 +54,7 @@ function Visningssted({ post, media }) {
         <div className="container p-4 flex flex-col lg:flex-row flex-wrap gap-4 max-w-5xl mx-auto">
         {post.acf.flater.map(post => (
             <div key={post.plassnr} className="flex font-sans rounded-md bg-gray-100 flex-1 max-w-xl">
-              <div className="flex-none w-48 relative">
+              <div className="flex-none w-1/3 relative">
                 <img
                   src={media.find(image => image.id === post.hovedbilde).media_details.sizes.large.source_url}
                   alt=""

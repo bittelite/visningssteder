@@ -17,8 +17,11 @@
     z-index: 1;
   }
 }
+ul {
+  @apply mb-2;
+}
 li {
-  @apply list-disc ml-4;
+  @apply list-disc ml-4 p-1;
 }
 
 

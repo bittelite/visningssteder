@@ -8,10 +8,13 @@ import styles from '../styles/Home.module.css';
 export const getStaticProps = async () => {
   const res = await fetch('https://reklameservice.no/wp-json/wp/v2/visningssteder');
   const posts = await res.json();
+  const steder = posts.map(sted => ( sted.acf.koordinat.breddegrad + ', ' + sted.acf.koordinat.lengdegrad ));
+  console.log(steder);
 
   return {
     props: { 
       postsList: posts,
+      stederList: steder,
     },
     revalidate: 10,
   }
@@ -20,7 +23,7 @@ export const getStaticProps = async () => {
 const DEFAULT_CENTER = [64.0, 8.257580];
 const NEW_MARKER = [62.746540, 7.257580];
 
-export default function Home({ postsList }) {
+export default function Home({ postsList, stederList }) {
   return (
     <>
     <Layout>
@@ -34,13 +37,11 @@ export default function Home({ postsList }) {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
               />
-              
               <Marker position={NEW_MARKER}>
                 <Popup>
                   Hei på deg<br /> se på meg!.
                 </Popup>
               </Marker>
-              
             </>
           )}
       </Map>
