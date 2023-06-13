@@ -53,32 +53,34 @@ function Visningssted({ post, media }) {
         </div>
         <div className="container p-4 flex flex-col lg:flex-row flex-wrap gap-4 max-w-5xl mx-auto">
         {post.acf.flater.map(post => (
-            <div key={post.plassnr} className="flex font-sans rounded-md bg-gray-100 flex-1 max-w-xl">
-              <div className="flex-none w-1/3 relative">
-                <img
-                  src={media.find(image => image.id === post.hovedbilde).media_details.sizes.large.source_url}
-                  alt=""
-                  className="absolute inset-0 w-full h-full rounded-l-md object-cover"
-                />
-              </div>
-              <form className="flex-auto p-6">
-                <div className="flex flex-wrap">
-                  <h3 className="flex-auto text-lg font-semibold text-slate-900">
-                    {post.type}
-                  </h3>
-                  <div className="text-lg font-semibold text-slate-500">
-                    {post.plassnr}
-                  </div>
-                  <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
-                    Format: {post.format}
-                  </div>
-                  <p className="text-sm text-slate-700">
-                    Plassering: {post.plassering}
-                  </p>
-                </div>
-              </form>
-            </div>
-            ))}
+  <div key={post.plassnr} className="flex font-sans rounded-md bg-gray-100 flex-1 max-w-xl">
+    {media.find(image => image.id === post.hovedbilde) && (
+      <div className="flex-none w-1/3 relative">
+        <img
+          src={media.find(image => image.id === post.hovedbilde).media_details.sizes.large.source_url}
+          alt=""
+          className="absolute inset-0 w-full h-full rounded-l-md object-cover"
+        />
+      </div>
+    )}
+    <form className="flex-auto p-6">
+      <div className="flex flex-wrap">
+        <h3 className="flex-auto text-lg font-semibold text-slate-900">
+          {post.type}
+        </h3>
+        <div className="text-lg font-semibold text-slate-500">
+          {post.plassnr}
+        </div>
+        <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
+          Format: {post.format}
+        </div>
+        <p className="text-sm text-slate-700">
+          Plassering: {post.plassering}
+        </p>
+      </div>
+    </form>
+  </div>
+))}
         </div>
       </div>
       </Layout>
