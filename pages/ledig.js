@@ -34,7 +34,7 @@ export async function getStaticProps() {
 function Page({ filteredIds }) {
   return (
     <>
-      <div className='grid w-full justify-center'>
+      <div className='grid w-full justify-center h-full'>
         <div>
           <h1 className='text-xl uppercase text-center'>Ledige reklameflater</h1>
         </div>
