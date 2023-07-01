@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Layout from '../components/Layout/Layout';
 
 export async function getStaticProps() {
   const res = await fetch('https://reklameservice.no/wp-json/wp/v2/visningssteder/')
@@ -34,9 +35,10 @@ export async function getStaticProps() {
 function Page({ filteredIds }) {
   return (
     <>
+    <Layout>
       <div className='grid w-full justify-center h-full'>
         <div>
-          <h1 className='text-xl uppercase text-center'>Ledige reklameflater</h1>
+          <h1 className='text-xl uppercase text-center font-bold text-white p-4 rounded-t-lg mt-4 bg-gray-500 bg-gradient-to-b'>Ledige reklameflater</h1>
         </div>
       {filteredIds.map((item) => (
       <div key={item.id}>
@@ -88,6 +90,7 @@ function Page({ filteredIds }) {
       </div>
       ))}
       </div>
+      </Layout>
     </>
   )
 }
