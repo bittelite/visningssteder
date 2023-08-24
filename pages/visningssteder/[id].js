@@ -9,7 +9,7 @@ function Visningssted({ post, media }) {
       <div className="container mx-auto max-w-7xl">
         <div className='relative'
         style={{
-          backgroundImage: `url(${post._embedded['wp:featuredmedia'][0].source_url})`,
+          backgroundImage: `url(${media._embedded['wp:featuredmedia'][0].source_url})`,
           backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -51,18 +51,18 @@ function Visningssted({ post, media }) {
             </div>
           </div>
         </div>
-        <div className="container p-4 flex flex-col lg:flex-row flex-wrap gap-4 max-w-5xl mx-auto">
+        <div className="grid justify-center items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 p-5 md:gap-10 md:p-10 lg:p-5 uppercase">
         {post.acf.flater.map(post => (
-  <div key={post.plassnr} className="flex font-sans rounded-md bg-gray-100 flex-1 max-w-xl">
-    {media.find(image => image.id === post.hovedbilde) && (
-      <div className="flex-none w-1/3 relative">
+  <div key={post.plassnr} className="card">
+
+      <div className="">
         <img
-          src={media.find(image => image.id === post.hovedbilde).media_details.sizes.large.source_url}
+          src={post.hovedbilde}
           alt=""
-          className="absolute inset-0 w-full h-full rounded-l-md object-cover"
+          className="object-cover brightness-50 hover:brightness-100"
         />
       </div>
-    )}
+
     <form className="flex-auto p-6">
       <div className="flex flex-wrap">
         <h3 className="flex-auto text-lg font-semibold text-slate-900">
@@ -98,9 +98,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const res = await fetch(`https://reklameservice.no/wp-json/wp/v2/visningssteder/${params.id}?_embed`);
+  const res = await fetch(`https://reklameservice.no/wp-json/wp/v2/visningssteder/${params.id}?acf_format=standard`);
   const post = await res.json();
-  const res2 = await fetch(`https://reklameservice.no/wp-json/wp/v2/media?parent=${params.id}`);
+  const res2 = await fetch(`https://reklameservice.no/wp-json/wp/v2/visningssteder/${params.id}?_embed`);
   const media = await res2.json();
   return {props: {post, media}, revalidate: 10,};
 }
